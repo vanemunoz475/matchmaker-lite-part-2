@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    Author: Vanessa Munoz
+    Project: MatchmakerWebLite - Part 2
+
+
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>Matchmaker</title>
+</head>
+
+<body>
+    <h1>Matchmaker Part 2</h1>
+    <p>Instroctions...</p>
+    <!-- Reference for HTML "option" tab/fields: https://www.w3schools.com/tags/tag_option.asp -->
+
+<label>Winter is the best season</label><br />
+<select id="q1">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neither Agree nor Disagree</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+<br /><br />
+
+
+<label>I can listen to more than three genres of music </label><br />
+<select id="q2">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neither Agree nor Disagree</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+<br /><br />
+
+<label>Avocados are disgusting</label><br />
+<select id="q3">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neither Agree nor Disagree</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+<br /><br />
+
+<label>English is better than math </label><br />
+<select id="q4">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neither Agree nor Disagree</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+<br /><br />
+
+<label>I hate rollercoasters</label><br />
+<select id="q5">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neither Agree nor Disagree</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+<br /><br />
+
+<br /><br /><br />
+<button onclick="calculateCompatability()"> Calculate Compatability</button>
+<p id="compatability"></p>
+
+<script>
+console.log("Starting Matchmaker Lite...");
+
+function calculateCompatability() {
+    console.log("calculateCompatability()");
+
+    const DESIRED_RESPONSE = [
+        5, /* strongly agree */
+        4,  /* agree */
+        3,  /* neither agree nor disagree */
+        2,  /* disagree */
+        1,   /* strongly disagree */
+
+    ]
+    const MAX_SCORE = 25; 
+
+// Get the current values of the dropdown controls. 
+let question1Response = document.getElementById('q1').selectedOptions[0].value;
+let question2Response = document.getElementById('q2').selectedOptions[0].value;
+let question3Response = document.getElementById('q3').selectedOptions[0].value;
+let question4Response = document.getElementById('q4').selectedOptions[0].value;
+let question5Response = document.getElementById('q5').selectedOptions[0].value;
+
+
+// Optionally log val associated w/ question 1 through 5 to the console 
+console.log("Question 1 Answers:");
+console.log(document.getElementById('q1').selectedOptions[0].text);
+console.log(document.getElementById('q1').selectedOptions[0].value);
+console.log(question1Response);
+
+console.log("Question 2 Answers:");
+console.log(document.getElementById('q2').selectedOptions[0].text);
+console.log(document.getElementById('q2').selectedOptions[0].value);
+console.log(question2Response);
+
+console.log("Question 3 Answers:");
+console.log(document.getElementById('q3').selectedOptions[0].text);
+console.log(document.getElementById('q3').selectedOptions[0].value);
+console.log(question3Response);
+
+console.log("Question 4 Answers:");
+console.log(document.getElementById('q4').selectedOptions[0].text);
+console.log(document.getElementById('q4').selectedOptions[0].value);
+console.log(question4Response);
+
+console.log("Question 5 Answers:");
+console.log(document.getElementById('q5').selectedOptions[0].text);
+console.log(document.getElementById('q5').selectedOptions[0].value);
+console.log(question5Response);
+
+    // Todo: Calc compatability scores. 
+    let question1Compatabilty = 5 - Math.abs(question1Response - DESIRED_RESPONSE[1]);
+    let question2Compatabilty = 5 - Math.abs(question2Response - DESIRED_RESPONSE[0]);
+    let question3Compatabilty = 5 - Math.abs(question3Response - DESIRED_RESPONSE[0]);
+    let question4Compatabilty = 5 - Math.abs(question4Response - DESIRED_RESPONSE[4]);
+    let question5Compatabilty = 5 - Math.abs(question5Response - DESIRED_RESPONSE[3]);
+
+    console.log("c1="+question1Compatabilty);
+    console.log("c2="+question2Compatabilty);
+    console.log("c3="+question3Compatabilty);
+    console.log("c4="+question4Compatabilty);
+    console.log("c5="+question5Compatabilty);
+    
+// Calc tot compatability. 
+let totalCompatability = question1Compatabilty + question2Compatabilty + question3Compatabilty + question4Compatabilty + question5Compatabilty;
+
+// Convert totCompatability to %. 
+totalCompatability *= 100 / MAX_SCORE; 
+totalCompatability = Math.round(totalCompatability);
+console.log("Total Compatability="+ totalCompatability);
+
+
+    document.getElementById("compatability").innerHTML = "Your compatability is: " +totalCompatability;
+}
+
+</script>
+
+
+</body>
+
+
+</html>
